@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<script src="angular.min.js"></script>
+
+<script>
+var app = angular.module('todoApp', []); 
+app.controller('todoContr', function($scope) {
+    $scope.todoList = ['Change color', 'Change bg'];
+
+    $scope.todoAdd = function() {
+        $scope.todoList.push($scope.todoInput);
+        $scope.todoInput = "";
+    };
+
+    $scope.todoDelete = function() {
+        var oldList = $scope.todoList;
+        $scope.todoList.splice(this.$index, 1);
+    };
+});
+</script>
+
+<body ng-app="todoApp" ng-controller="todoContr">
+
+<h2>ToDo List</h2>
+
+<form ng-submit="todoAdd()">
+    <input type="text" ng-model="todoInput" placeholder="Add New">
+    <input type="submit" value="Add New">
+</form>
+
+<br>
+
+<ul>
+    <li ng-repeat="x in todoList"> {{ x }} <button ng-click="todoDelete()">x</button></li>
+</ul>
+
+</body>
+</html>
